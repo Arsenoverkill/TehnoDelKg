@@ -26,17 +26,15 @@ function Footer() {
               <div className={styles.about}>
                 <div>
                   <h4>Адрес</h4>
-                  <p>
-                    115533, г. Москва, Нагатинская <br /> набережная д. 10
-                  </p>
+                  <p>6 мкр-н 39</p>
                 </div>
                 <div>
                   <h4>Время работы</h4>
-                  <p>9:00 - 20:00 по МСК</p>
+                  <p>9:00 - 20:00</p>
                 </div>
                 <div className={styles.phone_call}>
                   <h4>Позвонить</h4>
-                  <p>8(925) 201 75 96</p>
+                  <p>0(501) 488 113</p>
                 </div>
               </div>
             </div>

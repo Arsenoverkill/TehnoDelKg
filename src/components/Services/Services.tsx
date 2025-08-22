@@ -1,35 +1,46 @@
-import { useMemo } from "react";
-import freezer from "../../assets/img/freezer.png";
-import newFreezer from "../../assets/img/newFreezer.png";
-import washingMachine from "../../assets/img/washingMachine.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import style from "./Services.module.scss";
 
-interface IServices {
+interface IProduct {
   id: number;
-  title: string;
-  description: string;
+  name: string;
   image: string;
+  descriptions: string | null;
 }
+
 const Services = () => {
-  const services: IServices[] = useMemo(
-    () => [
-      {
-        id: 1,
-        title: "Ремонт холодильников",
-        description:
-          "От мелких ремонтов до капитального восстановления, замена компрессоров, устранение утечек.",
-        image: freezer,
-      },
-      {
-        id: 2,
-        title: "Ремонт промышленных холодильников",
-        description:
-          "Быстрое и надёжное восстановление работы с гарантией качества.",
-        image: newFreezer,
-      },
-    ],
-    []
-  );
+  const [services, setServices] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await axios.get("/api/product/");
+        setServices(res.data);
+      } catch (err: any) {
+        console.error("❌ Ошибка API:", err);
+        setError("Не удалось загрузить данные. Попробуйте позже.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  if (loading) {
+    return <div className={style.services_loading}>Загрузка...</div>;
+  }
+
+  if (error) {
+    return <div className={style.services_error}>{error}</div>;
+  }
+
+  if (services.length === 0) {
+    return <div className={style.services_empty}>Нет доступных услуг</div>;
+  }
 
   return (
     <div id="services" className={style.services}>
@@ -44,9 +55,16 @@ const Services = () => {
           <div className={style.services_list}>
             {services.map((service) => (
               <div key={service.id} className={style.service_item}>
-                <img src={service.image} alt={service.title} />
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
+                <img
+                  src={service.image}
+                  alt={service.name}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src =
+                      "https://via.placeholder.com/370x300?text=Нет+фото";
+                  }}
+                />
+                <h3>{service.name}</h3>
+                <p>{service.descriptions}</p>
               </div>
             ))}
           </div>

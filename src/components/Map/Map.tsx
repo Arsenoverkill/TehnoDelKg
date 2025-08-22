@@ -27,21 +27,25 @@ const Map: React.FC = () => {
       <div className={styles.contact_card}>
         <h3>Контакты</h3>
         <div className={styles.contacts}>
-          <p className={styles.row}>
+          <div className={styles.row}>
             <img src={Location} alt="Location" className={styles.icon} />
-            Ваш город: <a href="#">Москва</a>
-          </p>
-          <p className={styles.row}>
+            <span>
+              Ваш город: <a href="#">Москва</a>
+            </span>
+          </div>
+
+          <div className={styles.row}>
             <img src={Watch} alt="Watch" className={styles.icon} />
             <div className={styles.column}>
-              Время работы: <br />
+              <span>Время работы:</span> <br />
               <span className={styles.working_time}>с 9:00 - 20:00 по МСК</span>
             </div>
-          </p>
-          <p className={styles.row}>
-            <img src={Phone} alt="Phone" className={styles.icon} />8 (925) 201
-            75 96
-          </p>
+          </div>
+
+          <div className={styles.row}>
+            <img src={Phone} alt="Phone" className={styles.icon} />
+            <span>8 (925) 201 75 96</span>
+          </div>
         </div>
         <button className={styles.button}>Вызвать мастера</button>
       </div>
