@@ -5,7 +5,14 @@ import Telegram from "../../assets/icons/Social Icons.svg";
 import Facebook from "../../assets/icons/Social Icons (2).svg";
 import Instagram from "../../assets/icons/Social Icons (3).svg";
 
-function Footer() {
+interface IProduct {
+  id: number;
+  name: string;
+  image: string;
+  descriptions: string | null;
+}
+
+function Footer({ services }: { services: IProduct[] }) {
   return (
     <footer className={styles.footer}>
       <div className="container">
@@ -15,10 +22,13 @@ function Footer() {
             <div className={styles.content}>
               <h3>Услуги</h3>
               <ul>
-                <li>Ремонт холодильников</li>
-                <li>
-                  Ремонт промышленных <br /> холодильников
-                </li>
+                {services.length > 0 ? (
+                  services.map((service) => (
+                    <li key={service.id}>{service.name}</li>
+                  ))
+                ) : (
+                  <li>Нет доступных услуг</li>
+                )}
               </ul>
             </div>
             <div className={styles.contacts}>
