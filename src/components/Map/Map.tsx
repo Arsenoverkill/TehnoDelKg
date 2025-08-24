@@ -5,8 +5,12 @@ import Location from "../../assets/icons/gps2 1.svg";
 import Watch from "../../assets/icons/w512h5121390855838watch 1.svg";
 import Phone from "../../assets/icons/phone копия 2.svg";
 import CustomZoomControls from "./CustomZoomContols/CustomZoomControls";
+import { useState } from "react";
+import Modal from "../Modal/Modal";
 
 const Map: React.FC = () => {
+  const [open, setOpen] = useState<boolean>(false);
+
   return (
     <div id="contacts" className={styles.map_container}>
       <MapContainer
@@ -47,7 +51,10 @@ const Map: React.FC = () => {
             <span>8 (925) 201 75 96</span>
           </div>
         </div>
-        <button className={styles.button}>Вызвать мастера</button>
+        <button className={styles.button} onClick={() => setOpen(true)}>
+          Вызвать мастера
+        </button>
+        {open && <Modal onClose={() => setOpen(false)} />}
       </div>
     </div>
   );
