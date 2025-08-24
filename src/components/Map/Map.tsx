@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./Map.module.scss";
 import Location from "../../assets/icons/gps2 1.svg";
@@ -14,8 +14,8 @@ const Map: React.FC = () => {
   return (
     <div id="contacts" className={styles.map_container}>
       <MapContainer
-        center={[42.87, 74.625]}
-        zoom={13}
+        center={[42.821669, 74.626123]}
+        zoom={16}
         zoomControl={false}
         attributionControl={false}
         scrollWheelZoom={false}
@@ -25,6 +25,11 @@ const Map: React.FC = () => {
           url="https://tile2.maps.2gis.com/tiles?x={x}&y={y}&z={z}"
           attribution="&copy; OpenStreetMap contributors"
         />
+
+        <Marker position={[42.821669, 74.626123]}>
+          <Popup>6-й микрорайон, 39</Popup>
+        </Marker>
+
         <CustomZoomControls />
       </MapContainer>
 
@@ -34,21 +39,19 @@ const Map: React.FC = () => {
           <div className={styles.row}>
             <img src={Location} alt="Location" className={styles.icon} />
             <span>
-              Ваш город: <a href="#">Москва</a>
+              Ваш город: <a href="#">Бишкек</a>
             </span>
           </div>
-
           <div className={styles.row}>
             <img src={Watch} alt="Watch" className={styles.icon} />
             <div className={styles.column}>
-              <span>Время работы:</span> <br />
-              <span className={styles.working_time}>с 9:00 - 20:00 по МСК</span>
+              Время работы: <br />
+              <span className={styles.working_time}>с 9:00 - 20:00</span>
             </div>
           </div>
-
           <div className={styles.row}>
             <img src={Phone} alt="Phone" className={styles.icon} />
-            <span>8 (925) 201 75 96</span>
+            <span>0(501) 488 113</span>
           </div>
         </div>
         <button className={styles.button} onClick={() => setOpen(true)}>
