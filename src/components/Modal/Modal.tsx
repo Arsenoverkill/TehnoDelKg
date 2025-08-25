@@ -26,7 +26,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "/api/applications",
+        "/api/applications/",
         {
           name: name.trim(),
           phone_number: phone.trim(),
