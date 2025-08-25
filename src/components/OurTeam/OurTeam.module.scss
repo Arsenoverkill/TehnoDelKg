@@ -46,6 +46,54 @@
           }
         }
       }
+
+      // 🔹 Скелетон
+      .skeleton {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 300px;
+
+        .skeleton_img {
+          width: 100%;
+          height: 360px;
+          border-radius: 10px;
+          background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+          background-size: 200% 100%;
+          animation: loading 1.5s infinite;
+        }
+
+        .skeleton_text {
+          height: 20px;
+          border-radius: 5px;
+          background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+          background-size: 200% 100%;
+          animation: loading 1.5s infinite;
+
+          &.small {
+            width: 50%;
+          }
+        }
+      }
+
+      @keyframes loading {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      .Empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2 {
+          text-align: center;
+          color: rgba(68, 68, 68, 0.667);
+        }
+      }
     }
   }
 }
@@ -62,7 +110,6 @@
   height: 12px;
   opacity: 0.7;
 }
-
 :global(.swiper-pagination-bullet-active) {
   background: #053f79;
   border-radius: 12px;
@@ -102,6 +149,13 @@
             }
           }
         }
+
+        .skeleton {
+          width: 180px;
+          .skeleton_img {
+            height: 210px;
+          }
+        }
       }
     }
   }
@@ -113,58 +167,7 @@
     width: 10px;
     height: 10px;
   }
-
   :global(.swiper-pagination-bullet-active) {
     width: 1.5rem;
-  }
-}
-.loading,
-.empty,
-.error {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-top: 2rem;
-  color: #053f79;
-  font-weight: 500;
-  padding-block: 5rem;
-}
-
-.loading::after {
-  content: "";
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  margin-left: 0.8rem;
-  border: 3px solid #98c1d9;
-  border-top: 3px solid #053f79;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-.error {
-  color: #e63946;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 375px) {
-  .loading,
-  .empty,
-  .error {
-    font-size: 1rem;
-    margin-top: 1.5rem;
-  }
-
-  .loading::after {
-    width: 18px;
-    height: 18px;
-    border-width: 2px;
   }
 }

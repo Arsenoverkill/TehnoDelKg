@@ -1,4 +1,5 @@
 import star from "../../assets/icons/star.svg";
+import empty from "../../assets/img/Empty.svg";
 import style from "./OurTeam.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -16,17 +17,14 @@ interface ITeam {
 
 const OurTeam = () => {
   const [teams, setTeams] = useState<ITeam[]>([]);
-  const [loading, setLoading] = useState(true); // состояние загрузки
-  const [error, setError] = useState<string | null>(null); // если ошибка API
+  const [loading, setLoading] = useState(true);
 
   const getTeams = async () => {
     try {
-      setLoading(true);
       const res = await axios.get("/api/specialist/");
       setTeams(res.data);
     } catch (err) {
       console.error("Ошибка API:", err);
-      setError("Не удалось загрузить специалистов");
     } finally {
       setLoading(false);
     }
@@ -42,25 +40,34 @@ const OurTeam = () => {
         <div className={style.content}>
           <h1>Cпециалисты компании</h1>
 
-          {loading && <p className={style.loading}>Загрузка</p>}
-          {error && <p className={style.error}>{error}</p>}
-          {!loading && !error && teams.length === 0 && (
-            <p className={style.empty}>Нет данных</p>
-          )}
-
-          {!loading && !error && teams.length > 0 && (
-            <Swiper
-              modules={[Pagination]}
-              spaceBetween={30}
-              breakpoints={{
-                0: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 2.4 },
-              }}
-              pagination={{ clickable: true }}
-              className={style.ourteam}
-            >
-              {teams.map((item) => (
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={30}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 2.4 },
+            }}
+            pagination={{ clickable: true }}
+            className={style.ourteam}
+          >
+            {loading ? (
+              Array(3)
+                .fill(null)
+                .map((_, i) => (
+                  <SwiperSlide key={i}>
+                    <div className={style.skeleton}>
+                      <div className={style.skeleton_img}></div>
+                      <div className={style.skeleton_text}></div>
+                      <div className={style.skeleton_text}></div>
+                      <div
+                        className={`${style.skeleton_text} ${style.small}`}
+                      ></div>
+                    </div>
+                  </SwiperSlide>
+                ))
+            ) : teams.length > 0 ? (
+              teams.map((item) => (
                 <SwiperSlide key={item.id}>
                   <div className={style.team}>
                     <img
@@ -85,9 +92,14 @@ const OurTeam = () => {
                     </div>
                   </div>
                 </SwiperSlide>
-              ))}
-            </Swiper>
-          )}
+              ))
+            ) : (
+              <div className={style.Empty}>
+                <img src={empty} alt="empty image" />
+                <h2>Похоже здесь пусто</h2>
+              </div>
+            )}
+          </Swiper>
         </div>
       </div>
     </div>
