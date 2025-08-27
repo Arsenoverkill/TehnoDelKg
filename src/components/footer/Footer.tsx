@@ -67,12 +67,28 @@ function Footer({ services }: { services: IProduct[] }) {
                 className={styles.social_icon}
               />
             </a>
-            <img src={Facebook} alt="Facebook" className={styles.social_icon} />
-            <img
-              src={Instagram}
-              alt="Instagram"
-              className={styles.social_icon}
-            />
+            <a
+              href="https://www.instagram.com/tehnodel.kg?igsh=eTV4cjE4Y2U5dWVq&utm_source=ig_contact_invite"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={Instagram}
+                alt="Instagram"
+                className={styles.social_icon}
+              />
+            </a>
+            <a
+              href="https://www.facebook.com/share/1GCXuDev5s/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={Facebook}
+                alt="FaceBook"
+                className={styles.social_icon}
+              />
+            </a>
             <a
               href="https://t.me/+0501488113"
               target="_blank"
