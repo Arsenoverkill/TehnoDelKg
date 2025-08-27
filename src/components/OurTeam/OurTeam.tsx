@@ -44,7 +44,7 @@ const OurTeam = () => {
             modules={[Pagination]}
             spaceBetween={30}
             breakpoints={{
-              0: { slidesPerView: 1 },
+              0: { slidesPerView: 1.1 },
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 2.4 },
             }}
