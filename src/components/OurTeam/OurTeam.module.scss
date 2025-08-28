@@ -101,6 +101,10 @@
           text-align: center;
           color: rgba(68, 68, 68, 0.667);
         }
+        img {
+          width: clamp(15.625rem, 12.216rem + 17.05vw, 25rem);
+          height: clamp(12.5rem, 10.227rem + 11.36vw, 18.75rem);
+        }
       }
     }
   }
