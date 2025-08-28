@@ -57,8 +57,8 @@ const Map: React.FC = () => {
         <button className={styles.button} onClick={() => setOpen(true)}>
           Вызвать мастера
         </button>
-        {open && <Modal onClose={() => setOpen(false)} />}
       </div>
+      {open && <Modal onClose={() => setOpen(false)} />}
     </div>
   );
 };
